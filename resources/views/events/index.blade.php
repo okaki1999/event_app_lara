@@ -20,7 +20,7 @@
                 <nav class="panel panel-default">
                     <div class="panel-heading">フォルダ</div>
                     <div class="panel-body">
-                        <a href="#" class="btn btn-default btn-block">
+                        <a href="{{ route('genre.create') }}" class="btn btn-default btn-block">
                             フォルダを追加する
                         </a>
                     </div>
@@ -29,7 +29,7 @@
                             @foreach($genres as $genre)
                             <tr>
                                 <td>
-                                    <a href="{{ route('event.index', ['id' => $genre->id]) }}" class="list-group-item {{ $genre_id === $genre->id ? 'active' : '' }}">
+                                    <a href="{{ route('events.index', ['id' => $genre->id]) }}" class="list-group-item {{ $genre_id === $genre->id ? 'active' : '' }}">
                                         {{ $genre->title }}
                                     </a>
                                 </td>

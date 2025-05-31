@@ -9,6 +9,8 @@ Route::get("/genres/create", [GenreController::class,"showCreateForm"])->name("g
 Route::post("/genres/create", [GenreController::class,"create"]);
 Route::get('/genres/{id}/events/create', [EventController::class,"showCreateForm"])->name('events.create');
 Route::post('/genres/{id}/events/create', [EventController::class,"create"]);
+Route::get('/genres/{id}/edit', [GenreController::class,"showEditForm"])->name('genres.edit');
+Route::post('/genres/{id}/edit', [GenreController::class,"edit"]);
 //Route::get('/', function () {
 //    return view('welcome');
 //});

@@ -40,7 +40,7 @@ class EventController extends Controller
     }
 
     /**
-     *  【タスクの作成機能】
+     *  【イベントの作成機能】
      *
      *  POST /genres/{id}/events/create
      *  @param int $id
@@ -62,8 +62,8 @@ class EventController extends Controller
     }
 
     /**
-     *  【タスク編集ページの表示機能】
-     *  機能：タスクIDをフォルダ編集ページに渡して表示する
+     *  【イベント編集ページの表示機能】
+     *  機能：イベントIDをジャンル編集ページに渡して表示する
      *  
      *  GET /genres/{id}/events/{event_id}/edit
      *  @param int $id
@@ -80,8 +80,8 @@ class EventController extends Controller
     }
 
     /**
-     *  【タスクの編集機能】
-     *  機能：タスクが編集されたらDBを更新処理をしてタスク一覧にリダイレクトする
+     *  【イベントの編集機能】
+     *  機能：イベントが編集されたらDBを更新処理をしてイベント一覧にリダイレクトする
      *  
      *  POST /genres/{id}/events/{event_id}/edit
      *  @param int $id
@@ -100,6 +100,42 @@ class EventController extends Controller
 
         return redirect()->route('events.index', [
             'id' => $event->genre_id,
+        ]);
+    }
+    
+    /**
+     *  【イベント削除ページの表示機能】
+     *
+     *  GET /genres/{id}/events/{event_id}/delete
+     *  @param int $id
+     *  @param int $event_id
+     *  @return \Illuminate\View\View
+     */
+    public function showDeleteForm(int $id, int $event_id)
+    {
+        $event = Event::find($event_id);
+
+        return view('events/delete', [
+            'event' => $event,
+        ]);
+    }
+
+    /**
+     *  【イベントの削除機能】
+     *
+     *  POST /genres/{id}/events/{event_id}/delete
+     *  @param int $id
+     *  @param int $event_id
+     *  @return \Illuminate\View\View
+     */
+    public function delete(int $id, int $event_id)
+    {
+        $event = Event::find($event_id);
+
+        $event->delete();
+
+        return redirect()->route('events.index', [
+            'id' => $id
         ]);
     }
 }

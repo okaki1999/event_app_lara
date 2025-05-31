@@ -7,14 +7,14 @@
 <!--
 *   section：子ビューにsectionでデータを定義する
 *   セクション名：content を指定
-*   用途：フォルダを削除するページのHTMLを表示する
+*   用途：ジャンルを削除するページのHTMLを表示する
 -->
 @section('content')
 <div class="container">
     <div class="row">
     <div class="col col-md-offset-3 col-md-6">
         <nav class="panel panel-default">
-            <div class="panel-heading">フォルダを削除する</div>
+            <div class="panel-heading">ジャンルを削除する</div>
             <div class="panel-body">
                 @if($errors->any())
                     <div class="alert alert-danger">
@@ -28,7 +28,7 @@
                 <form action="{{ route('genres.delete', ['id' => $genre_id]) }}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="title">フォルダ名</label>
+                        <label for="title">ジャンル名</label>
                         <input type="text" class="form-control" name="title" id="title" value="{{ old('title') ?? $genre_title }}" disabled />
                     </div>
                     <p>上記の項目を削除しようとしています。本当によろしいでしょうか？</p>

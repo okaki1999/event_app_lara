@@ -10,20 +10,20 @@
 *   用途：javascriptライブラリー「flatpickr」のスタイルシートを指定
 -->
 @section('styles')
-  @include('share.flatpickr.styles')
+    @include('share.flatpickr.styles')
 @endsection
 
 <!--
 *   section：子ビューにsectionでデータを定義する
 *   セクション名：content を指定
-*   用途：イベントを編集するページのHTMLを表示する
+*   用途：イベントを削除するページのHTMLを表示する
 -->
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col col-md-offset-3 col-md-6">
                 <nav class="panel panel-default">
-                    <div class="panel-heading">イベントを編集する</div>
+                    <div class="panel-heading">イベントを削除する</div>
                     <div class="panel-body">
                         @if($errors->any())
                         <div class="alert alert-danger">
@@ -34,17 +34,17 @@
                             </ul>
                         </div>
                         @endif
-                        <form action="{{ route('events.edit', ['id' => $event->genre_id, 'event_id' => $event->id]) }}" method="POST">
+                        <form action="{{ route('events.delete', ['id' => $event->genre_id, 'event_id' => $event->id]) }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="title">タイトル</label>
                                 <input type="text" class="form-control" name="title" id="title"
                                     value="{{ old('title') ?? $event->title }}"
-                                />
+                                disabled />
                             </div>
                             <div class="form-group">
                                 <label for="status">状態</label>
-                                <select name="status" id="status" class="form-control">
+                                <select name="status" id="status" class="form-control" disabled>
                                     @foreach(\App\Models\Event::STATUS as $key => $val)
                                         <option value="{{ $key }}" {{ $key == old('status', $event->status) ? 'selected' : '' }}>
                                             {{ $val['label'] }}
@@ -53,11 +53,13 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="start_date">期限</label>
-                                <input type="text" class="form-control" name="start_date" id="start_date" value="{{ old('start_date') ?? $event->formatted_start_date }}" />
+                                <label for="due_date">期限</label>
+                                <input type="text" class="form-control" name="due_date" id="due_date" value="{{ old('due_date') ?? $event->formatted_due_date }}" disabled />
                             </div>
+                            <p>上記の項目を削除しようとしています。本当によろしいでしょうか？</p>
                             <div class="text-right">
-                                <button type="submit" class="btn btn-primary">送信</button>
+                                <button type="button" class="btn btn-primary" onclick="window.location='{{ route('events.index', ['id' => $event->genre_id]) }}'">キャンセル</button>
+                                <button type="submit" class="btn btn-primary">削除</button>
                             </div>
                         </form>
                     </div>
@@ -74,5 +76,5 @@
 *   用途：javascriptライブラリー「flatpickr」のインポート
 -->
 @section('scripts')
-  @include('share.flatpickr.scripts')
+    @include('share.flatpickr.scripts')
 @endsection

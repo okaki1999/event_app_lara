@@ -10,10 +10,10 @@
         <div class="row">
             <div class="col col-md-4">
                 <nav class="panel panel-default">
-                    <div class="panel-heading">フォルダ</div>
+                    <div class="panel-heading">ジャンル</div>
                     <div class="panel-body">
                         <a href="{{ route('genre.create') }}" class="btn btn-default btn-block">
-                            フォルダを追加する
+                            ジャンルを追加する
                         </a>
                     </div>
                     <div class="list-group">
@@ -35,11 +35,11 @@
             </div>
             <div class="column col-md-8">
             <div class="panel panel-default">
-                <div class="panel-heading">タスク</div>
+                <div class="panel-heading">イベント</div>
                 <div class="panel-body">
                     <div class="text-right">
                         <a href="{{ route('events.create', ['id' => $genre_id]) }}" class="btn btn-default btn-block">
-                            タスクを追加する
+                            イベントを追加する
                         </a>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                                 </td>
                                 <td>{{ $event->formatted_start_date }}</td>
                                 <td><a href="{{ route('events.edit', ['id' => $event->genre_id, 'event_id' => $event->id]) }}">編集</a></td>
-                                <td><a href="#">削除</a></td>
+                                <td><a href="{{ route('events.delete', ['id' => $event->genre_id, 'event_id' => $event->id]) }}">削除</a></td>
                             </tr>
                         @endforeach
                     </tbody>

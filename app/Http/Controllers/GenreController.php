@@ -76,8 +76,8 @@ class GenreController extends Controller
     }
 
     /**
-     *  【フォルダ削除ページの表示機能】
-     *  機能：フォルダIDをフォルダ編集ページに渡して表示する
+     *  【ジャンル削除ページの表示機能】
+     *  機能：ジャンルIDをジャンル編集ページに渡して表示する
      *
      *  GET /genres/{id}/delete
      *  @param int $id
@@ -94,8 +94,8 @@ class GenreController extends Controller
     }
 
     /**
-     *  【フォルダの削除機能】
-     *  機能：フォルダが削除されたらDBから削除し、フォルダ一覧にリダイレクトする
+     *  【ジャンルの削除機能】
+     *  機能：ジャンルが削除されたらDBから削除し、ジャンル一覧にリダイレクトする
      *
      *  POST /genres/{id}/delete
      *  @param int $id

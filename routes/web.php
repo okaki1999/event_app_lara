@@ -15,6 +15,9 @@ Route::get('/genres/{id}/events/{event_id}/edit', [EventController::class,"showE
 Route::post('/genres/{id}/events/{event_id}/edit', [EventController::class,"edit"]);
 Route::get('/genres/{id}/delete', [GenreController::class,"showDeleteForm"])->name('genres.delete');
 Route::post('/genres/{id}/delete', [GenreController::class,"delete"]);
+/* events new delete page */
+Route::get('/genres/{id}/events/{event_id}/delete', [EventController::class,"showDeleteForm"])->name('events.delete');
+Route::post('/genres/{id}/events/{event_id}/delete', [EventController::class,"delete"]);
 //Route::get('/', function () {
 //    return view('welcome');
 //});

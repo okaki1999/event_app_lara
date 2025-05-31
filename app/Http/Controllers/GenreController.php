@@ -12,7 +12,7 @@ class GenreController extends Controller
     /**
      *  【ジャンル作成ページの表示機能】
      *
-     *  GET /folders/create
+     *  GET /genres/create
      *  @return \Illuminate\View\View
      */
     public function showCreateForm()
@@ -72,6 +72,46 @@ class GenreController extends Controller
 
         return redirect()->route('events.index', [
             'id' => $genre->id,
+        ]);
+    }
+
+    /**
+     *  【フォルダ削除ページの表示機能】
+     *  機能：フォルダIDをフォルダ編集ページに渡して表示する
+     *
+     *  GET /genres/{id}/delete
+     *  @param int $id
+     *  @return \Illuminate\View\View
+     */
+    public function showDeleteForm(int $id)
+    {
+        $genre = Genre::find($id);
+
+        return view('genres/delete', [
+            'genre_id' => $genre->id,
+            'genre_title' => $genre->title,
+        ]);
+    }
+
+    /**
+     *  【フォルダの削除機能】
+     *  機能：フォルダが削除されたらDBから削除し、フォルダ一覧にリダイレクトする
+     *
+     *  POST /genres/{id}/delete
+     *  @param int $id
+     *  @return RedirectResponse
+     */
+    public function delete(int $id)
+    {
+        $genre = Genre::find($id);
+
+        $genre->events()->delete();
+        $genre->delete();
+
+        $genre = Genre::first();
+
+        return redirect()->route('events.index', [
+            'id' => $genre->id
         ]);
     }
 }

@@ -26,7 +26,7 @@
                                     </a>
                                 </td>
                                 <td><a href="{{ route('genres.edit', ['id' => $genre->id]) }}">編集</a></td>
-                                <td><a href="#">削除</a></td>
+                                <td><a href="{{ route('genres.delete', ['id' => $genre->id]) }}">削除</a></td>
                             </tr>
                             @endforeach
                         </table>

@@ -11,6 +11,10 @@ Route::get('/genres/{id}/events/create', [EventController::class,"showCreateForm
 Route::post('/genres/{id}/events/create', [EventController::class,"create"]);
 Route::get('/genres/{id}/edit', [GenreController::class,"showEditForm"])->name('genres.edit');
 Route::post('/genres/{id}/edit', [GenreController::class,"edit"]);
+Route::get('/genres/{id}/events/{event_id}/edit', [EventController::class,"showEditForm"])->name('events.edit');
+Route::post('/genres/{id}/events/{event_id}/edit', [EventController::class,"edit"]);
+Route::get('/genres/{id}/delete', [GenreController::class,"showDeleteForm"])->name('genres.delete');
+Route::post('/genres/{id}/delete', [GenreController::class,"delete"]);
 //Route::get('/', function () {
 //    return view('welcome');
 //});

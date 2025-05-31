@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Genre;
 use App\Models\Event;
 use App\Http\Requests\CreateEvent;
+use App\Http\Requests\EditEvent;
 
 class EventController extends Controller
 {
@@ -57,6 +58,48 @@ class EventController extends Controller
 
         return redirect()->route('events.index', [
             'id' => $genre->id,
+        ]);
+    }
+
+    /**
+     *  【タスク編集ページの表示機能】
+     *  機能：タスクIDをフォルダ編集ページに渡して表示する
+     *  
+     *  GET /genres/{id}/events/{event_id}/edit
+     *  @param int $id
+     *  @param int $event_id
+     *  @return \Illuminate\View\View
+     */
+    public function showEditForm(int $id, int $event_id)
+    {
+        $event = Event::find($event_id);
+
+        return view('events/edit', [
+            'event' => $event,
+        ]);
+    }
+
+    /**
+     *  【タスクの編集機能】
+     *  機能：タスクが編集されたらDBを更新処理をしてタスク一覧にリダイレクトする
+     *  
+     *  POST /genres/{id}/events/{event_id}/edit
+     *  @param int $id
+     *  @param int $event_id
+     *  @param EditEvent $request
+     *  @return \Illuminate\Http\RedirectResponse
+     */
+    public function edit(int $id, int $event_id, EditEvent $request)
+    {
+        $event = Event::find($event_id);
+
+        $event->title = $request->title;
+        $event->status = $request->status;
+        $event->start_date = $request->start_date;
+        $event->save();
+
+        return redirect()->route('events.index', [
+            'id' => $event->genre_id,
         ]);
     }
 }

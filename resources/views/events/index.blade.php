@@ -25,7 +25,7 @@
                                         {{ $genre->title }}
                                     </a>
                                 </td>
-                                <td><a href="#">編集</a></td>
+                                <td><a href="{{ route('genres.edit', ['id' => $genre->id]) }}">編集</a></td>
                                 <td><a href="#">削除</a></td>
                             </tr>
                             @endforeach
@@ -61,7 +61,7 @@
                                     <span class="label {{ $event->status_class }}">{{ $event->status_label }}</span>
                                 </td>
                                 <td>{{ $event->formatted_start_date }}</td>
-                                <td><a href="#">編集</a></td>
+                                <td><a href="{{ route('events.edit', ['id' => $event->genre_id, 'event_id' => $event->id]) }}">編集</a></td>
                                 <td><a href="#">削除</a></td>
                             </tr>
                         @endforeach
